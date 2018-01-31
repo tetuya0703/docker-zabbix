@@ -1,0 +1,34 @@
+version: "2"
+settings:
+  conductor_base: debian:jessie
+
+services:
+  wordpress:
+    from: "wordpress:latest"
+    ports:
+      - "8888:80"
+    environment:
+      WORDPRESS_VERSION: 4.8
+      WORDPRESS_SHA1: 3738189a1f37a03fb9cb087160b457d7a641ccb4
+      WORDPRESS_DB_HOST: wordpress-db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: foobar
+      WORDPRESS_DB_NAME: wordpress
+    links:
+      - wordpress-db:wordpress-db
+    depends_on:
+      - wordpress-db
+    volume: ["/var/www/html"]
+
+  wordpress-db:
+    from: "mysql:latest"
+    expose: [3306]
+    environment:
+      MYSQL_MAJOR: 5.7
+      MYSQL_VERSION: 5.7.18-1debian8
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: foobar
+      MYSQL_ROOT_PASSWORD: foobar
+
+registries: {}
