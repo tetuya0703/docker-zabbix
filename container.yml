@@ -34,7 +34,7 @@ services:
       - mysql-server
 
   zabbix-web-nginx-mysql:
-    from: "zabbix/zabbix-web-nginx-mysql:ubuntu-3.4-latest"
+    from: "tetuya0703/zabbix-web-nginx-mysql:ubuntu-latest"
     ports:
       - "8888:80"
     environment:
